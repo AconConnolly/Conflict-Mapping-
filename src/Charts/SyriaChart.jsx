@@ -4,15 +4,15 @@ import * as d3 from 'd3';
 const data = [
     { name: "Aggressor Casualties", value: 182647 },
     { name: "Defender Casualaties", value: 209375},
-    { name: "Civilian casualties", value: 306887},
-    { name: "Displaced Refugees", value: 12300000}
+    { name: "Civilian casualties", value: 306887}
+    // { name: "Displaced Refugees", value: 12300000}
 ]
 
 const SyriaChart = ({}) => {
     const svgRef = useRef(null);
 
     useEffect(() => {
-        const width = 928;
+        const width = 600;
         const height = Math.min(width, 500);
 
         const color = d3.scaleOrdinal()
@@ -40,7 +40,7 @@ const SyriaChart = ({}) => {
       .attr("width", width)
       .attr("height", height)
       .attr("viewBox", [-width / 2, -height / 2, width, height])
-      .attr("style", "max-width: 100%; height: auto; font: 10px sans-serif;");
+      .attr("style", "max-width: 100%; height: auto; font: 10px sans-serif; font-size: large;");
 
     svg.append("g")
       .attr("stroke", "white")
@@ -59,12 +59,12 @@ const SyriaChart = ({}) => {
       .join("text")
       .attr("transform", d => `translate(${arcLabel.centroid(d)})`)
       .call(text => text.append("tspan")
-        .attr("y", "-0.4em")
+        .attr("y", "-0.9em")
         .attr("font-weight", "bold")
         .text(d => d.data.name))
       .call(text => text.filter(d => (d.endAngle - d.startAngle) > 0.25).append("tspan")
-        .attr("x", 0)
-        .attr("y", "0.7em")
+        .attr("x", "0.4em")
+        .attr("y", "0.2em")
         .attr("fill-opacity", 0.7)
         .text(d => d.data.value.toLocaleString("en-US")));
   }, [data]);
